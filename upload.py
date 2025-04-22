@@ -6,6 +6,7 @@ from os import getenv
 from pyrogram import Client
 from pyrogram.enums import ParseMode
 from utils import *
+from pyromark import html
 
 
 async def main():
@@ -18,7 +19,9 @@ async def main():
     chat = int(getenv("CHAT"))
     async with app:
         filejs = open("data.txt").read()
-        await app.send_message(chat_id=chat, text=filejs, parse_mode=ParseMode.MARKDOWN)
+        await app.send_message(
+            chat_id=chat, text=html(filejs), parse_mode=ParseMode.MARKDOWN
+        )
         for data in json.loads(open("otp.json").read()).values():
             logslnk = await paste(data["logs"])
             try:
@@ -30,6 +33,7 @@ async def main():
                 )
             except:
                 traceback.print_exc()
+
 
 uvloop.install()
 asyncio.run(main())

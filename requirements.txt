@@ -1,6 +1,6 @@
 beautifulsoup4
 requests
 uvloop
-PyTgCrypto
-pyrotgfork
+pyrotgfork[fast]
 aiohttp
+pyromark
