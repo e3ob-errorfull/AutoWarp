@@ -20,7 +20,7 @@ async def main():
     async with app:
         filejs = open("data.txt").read()
         await app.send_message(
-            chat_id=chat, text=html(filejs), parse_mode=ParseMode.MARKDOWN
+            chat_id=chat, text=html(filejs)
         )
         for data in json.loads(open("otp.json").read()).values():
             logslnk = await paste(data["logs"])
