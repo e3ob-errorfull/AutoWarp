@@ -28,7 +28,8 @@ jobs:
           EVENT: ${{github.event_name}}
         id: check
         run: |
-          curl https://api.github.com/repos/revanced/revanced-patches/releases | jq -r '.[0]' > release.json
+          rs=$(curl https://api.github.com/repos/revanced/revanced-patches/releases) 
+          echo $rs | jq -r '.[0]' > release.json
           tag=$(jq -r '.tag_name' release.json)
           exists=$(jq --arg tag "$tag" 'index($tag)' releases.json)
           jq ". + [\"$tag\"]" releases.json > tmp.json && mv tmp.json releases.json
